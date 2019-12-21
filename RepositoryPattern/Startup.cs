@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using MovieAPI.Models;
 
 namespace RepositoryPattern
 {
@@ -26,6 +28,12 @@ namespace RepositoryPattern
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<MovieAPIContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MovieAPIContext")));
+
+            services.AddDbContext<MovieAPIContext>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString("MovieAPIContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
